@@ -41,7 +41,7 @@ def get_student():
 
 @app.put('/students')
 def student(student: Student):
-    if(student.Reference == student_list.index(student.Reference)):
+    if(student.Reference in student_list):
         student_list.insert(student, student_list.index(student.Reference))
         return student_list
     else:

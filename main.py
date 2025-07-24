@@ -38,3 +38,10 @@ def students(student: Student):
 @app.get('/students')
 def get_student():
     return student_list
+
+@app.put('/students')
+def student(student: Student):
+    if(student.Reference == student_list.index(student.Reference)):
+        student_list.insert(student, student_list.index(student.Reference))
+    else:
+        student_list.append(student)

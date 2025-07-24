@@ -43,5 +43,7 @@ def get_student():
 def student(student: Student):
     if(student.Reference == student_list.index(student.Reference)):
         student_list.insert(student, student_list.index(student.Reference))
+        return student_list
     else:
         student_list.append(student)
+        return student_list

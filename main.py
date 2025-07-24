@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+from starlette.responses import JSONResponse
 
 app = FastAPI()
 
@@ -10,10 +12,15 @@ def read_root():
 def read_item(item_id: int):
     return {"item_id": item_id}
 
+class User(BaseModel):
+    username: str
+    password: str
+
+
 @app.post('/login')
-def login(username: str, password: str):
-    if(username == "admin" and password == "password"):
-        return {"message": "Login successful"}
+def login(user: User):
+    if(user.username == "admin" and user.password == "password"):
+        return JSONResponse(content={"message": "Login successful"}, status_code=200)
     else:
-        return {"message": "Login failed"}
+        return JSONResponse(content={"message": "Login failed"}, status_code=401)
     
